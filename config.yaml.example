@@ -1,0 +1,71 @@
+# Network Sniffer Configuration File
+# Copy this to config.yaml and customize for your environment
+
+# Capture settings
+capture:
+  # List of interfaces to monitor (auto-detected if empty)
+  interfaces:
+    - eth0
+    - eth1
+
+  # BPF filter for packet capture (optional)
+  # Examples:
+  #   "tcp port 443" - HTTPS traffic only
+  #   "host 192.168.1.1" - Traffic to/from specific host
+  #   "not port 22" - Exclude SSH traffic
+  bpf_filter: ""
+
+  # Capture duration in seconds (0 = continuous)
+  duration: 0
+
+  # Packet buffer size (increase if dropping packets)
+  buffer_size: 10000
+
+  # Enable promiscuous mode
+  promiscuous: true
+
+# Alert configuration
+alerts:
+  # Alert profile: voip, video, gaming, general
+  # Each profile has different threshold settings
+  profile: general
+
+  # Enable/disable alerting
+  enabled: true
+
+  # Custom thresholds (override profile defaults)
+  thresholds:
+    packet_loss:
+      warning: 1.0    # percentage
+      critical: 5.0
+    latency:
+      warning: 100.0  # milliseconds
+      critical: 200.0
+    jitter:
+      warning: 30.0   # milliseconds
+      critical: 50.0
+
+# Export settings
+export:
+  # Automatically export reports
+  auto_export: false
+
+  # Export interval in seconds
+  interval: 300
+
+  # Export format: json, csv, html
+  format: json
+
+  # Output directory for reports
+  output_dir: ./reports
+
+# Dashboard settings
+dashboard:
+  # Refresh rate in seconds
+  refresh_rate: 1.0
+
+  # Show charts in dashboard
+  show_charts: true
+
+  # Number of data points for charts
+  chart_history: 60
